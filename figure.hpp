@@ -1,3 +1,6 @@
+#ifndef FIGURE_HPP
+#define FIGURE_HPP
+
 enum class FigureType : char
 {
   PAWN = 'P',
@@ -29,3 +32,5 @@ class Figure
     FigureType getType();
     Colour getColour();
 };
+
+#endif // FIGURE_HPP

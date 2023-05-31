@@ -4,19 +4,47 @@ Game::Game()
 {
   try
   {
-    std::vector<std::string> config = getConfig("config.txt");
-    board_ = std::make_shared<Board>(config);
+    config_ = getConfig("config.txt");
+    board_ = std::make_shared<Board>(config_);
+    players_.push_back(std::make_shared<Player>(Colour::WHITE));
+    players_.push_back(std::make_shared<Player>(Colour::BLACK));
   }
   catch(const std::exception& e)
   {
-    throw e;
+    throw std::runtime_error(e.what());
   }
   
 };
 
+void Game::firstRound()
+{
+  try
+  {
+    auto& config_colour = config_.at(8);
+    if (config_colour == "w" || config_colour == "W")
+    {
+      players_.at(0)->getInput();
+      players_.at(1)->getInput();
+    }
+    else if (config_colour == "b" || config_colour == "B")
+    {
+      players_.at(1)->getInput();
+    }
+    else
+    {
+      throw std::runtime_error("Invalid config colour!");
+    }
+  }
+  catch(const std::exception& e)
+  {
+    throw std::runtime_error(e.what());
+  }
+}
+
 void Game::run()
 {
   std::cout << *board_;
+  firstRound();
 }
 
 std::vector<std::string> Game::getConfig(std::string path)
@@ -60,7 +88,6 @@ std::vector<std::string> Game::getConfig(std::string path)
   } 
   catch (const std::exception& e)
   {
-    std::cout << "Exception occurred: " << e.what() << std::endl;
-    throw e;
+    throw std::runtime_error(e.what());
   }
 };

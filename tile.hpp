@@ -1,3 +1,6 @@
+#ifndef TILE_HPP
+#define TILE_HPP
+
 #include "figure.hpp"
 #include <memory>
 #include <iostream>
@@ -28,3 +31,5 @@ class Tile
     Column column_;
     std::shared_ptr<Figure> figure_on_;
 };
+
+#endif // TILE_HPP

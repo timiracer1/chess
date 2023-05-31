@@ -1,3 +1,6 @@
+#ifndef BOARD_HPP
+#define BOARD_HPP
+
 #include "tile.hpp"
 #include <vector>
 #include <iostream>
@@ -17,3 +20,5 @@ class Board
     ~Board() = default;
     friend std::ostream& operator<<(std::ostream& stream, Board& board);
 };
+
+#endif // BOARD_HPP

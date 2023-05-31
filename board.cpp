@@ -1,48 +1,5 @@
 #include "board.hpp"
 
-// Board::Board(std::vector<std::string> config)
-// {
-//   std::shared_ptr<Figure> current_figure;
-//   Colour current_color;
-//   for (int row = 1; row <= 8; row++)
-//   {
-//     std::vector<std::shared_ptr<Tile>> current_row;
-//     for (int column = 1; column <= 8; column++)
-//     {
-//       if (row == 1 || row == 8)
-//       {
-//         if (row == 1)
-//           current_color = Colour::WHITE;
-//         else
-//           current_color = Colour::BLACK;
-//         if (column == static_cast<int>(Column::a) || column == static_cast<int>(Column::h))
-//           current_figure = std::make_shared<Figure>(FigureType::ROOK, current_color);
-//         else if (column == static_cast<int>(Column::b) || column == static_cast<int>(Column::g))
-//           current_figure = std::make_shared<Figure>(FigureType::KNIGHT, current_color);
-//         else if (column == static_cast<int>(Column::c) || column == static_cast<int>(Column::f))
-//           current_figure = std::make_shared<Figure>(FigureType::BISHOP, current_color);
-//         else if (column == static_cast<int>(Column::d))
-//           current_figure = std::make_shared<Figure>(FigureType::QUEEN, current_color);
-//         else if (column == static_cast<int>(Column::e))
-//           current_figure = std::make_shared<Figure>(FigureType::KING, current_color);
-//       }
-//       else if (row == 2 || row == 7)
-//       {
-//         if (row == 2)
-//           current_color = Colour::WHITE;
-//         else
-//           current_color = Colour::BLACK;
-//         current_figure = std::make_shared<Figure>(FigureType::PAWN, current_color);
-//       }
-//       else
-//         current_figure = std::make_shared<Figure>(FigureType::NONE, Colour::NONE);
-//       current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), current_figure));
-//     }
-//     map_.push_back(current_row);
-//   }
-// };
-
-
 Board::Board(std::vector<std::string> config)
 {
   try
@@ -52,12 +9,13 @@ Board::Board(std::vector<std::string> config)
       auto& current_config_line = config.at(row - 1);
       if (current_config_line.size() > 8)
       {
-        throw std::runtime_error("INVALID LENGTH IN CONFIG FILE!");
+        throw std::runtime_error("Invalid length in config File!");
       }
       std::vector<std::shared_ptr<Tile>> current_row;
-      for (size_t column = 1; column <= current_config_line.size(); column++)
+      size_t empty_fields = 0;
+      for (size_t column = 1; column <= 8; column++)
       {
-        auto& current_char = current_config_line.at(column - 1);
+        auto& current_char = current_config_line.at(column - 1 - empty_fields);
         if (current_char == 'r')
         {
           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::ROOK, Colour::BLACK)));
@@ -108,15 +66,15 @@ Board::Board(std::vector<std::string> config)
         }
         else if ('1' <= current_char && current_char <= '8')
         {
-          int empty_fields = current_char - '0';
-          for (int i = 0; i < empty_fields; i++)
+          empty_fields += current_char - '0';
+          for (size_t i = 0; i < (size_t) current_char - '0'; i++)
           {
             current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column++), std::make_shared<Figure>(FigureType::NONE, Colour::NONE)));
           }
         }
         else
         {
-          throw std::runtime_error("INVALID ENTRY IN CONFIG FILE!");
+          throw std::runtime_error("Invalid entry in config File!");
         }
       }
       map_.push_back(current_row);
@@ -124,8 +82,7 @@ Board::Board(std::vector<std::string> config)
   }
   catch(const std::exception& e)
   {
-    std::cout << "ERROR: " << e.what() << std::endl;
-    throw e;
+    throw std::runtime_error(e.what());
   }
   
 };
