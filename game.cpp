@@ -13,7 +13,6 @@ Game::Game()
   {
     throw std::runtime_error(e.what());
   }
-  
 };
 
 void Game::firstRound()

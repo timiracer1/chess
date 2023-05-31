@@ -4,6 +4,8 @@
 #include "figure.hpp"
 #include <string>
 #include <iostream>
+#include <vector>
+#include <sstream>
 
 class Player
 {
@@ -15,7 +17,7 @@ class Player
     Player(Player& player) = delete;
     ~Player() = default;
     Colour getColour();
-    std::string getInput();
+    std::vector<std::string> getInput();
 };
 
 #endif // PLAYER_HPP
