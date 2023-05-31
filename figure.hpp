@@ -27,4 +27,5 @@ class Figure
     Figure(FigureType& figure) = delete;
     ~Figure() = default;
     FigureType getType();
+    Colour getColour();
 };

@@ -9,6 +9,6 @@ std::shared_ptr<Figure> Tile::getFigure()
 
 std::ostream& operator<<(std::ostream& stream, Tile& tile)
 {
-  stream << static_cast<char>(tile.figure_on_->getType());
+  stream << static_cast<char>(tile.figure_on_->getColour()) << static_cast<char>(tile.figure_on_->getType());
   return stream;
 }
