@@ -17,7 +17,7 @@ class Game
     std::vector<std::shared_ptr<Player>> players_;
     std::vector<std::string> config_;
     std::vector<std::string> getConfig(std::string path);
-    int execute(std::shared_ptr<Action> action);
+    void execute(std::shared_ptr<Player> player, std::shared_ptr<Action> action);
     int firstRound();
 
   public:

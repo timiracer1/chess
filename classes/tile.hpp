@@ -1,7 +1,13 @@
 #ifndef TILE_HPP
 #define TILE_HPP
 
-#include "figure.hpp"
+#include "pieces/figure.hpp"
+#include "pieces/pawn.hpp"
+#include "pieces/bishop.hpp"
+#include "pieces/king.hpp"
+#include "pieces/queen.hpp"
+#include "pieces/knight.hpp"
+#include "pieces/rook.hpp"
 #include <memory>
 #include <iostream>
 

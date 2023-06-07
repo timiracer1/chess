@@ -24,6 +24,7 @@ class Figure
   private:
     FigureType type_;
     Colour colour_;
+    bool has_moved_;
   
   public:
     Figure(FigureType type, Colour colour);

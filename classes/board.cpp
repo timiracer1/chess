@@ -18,51 +18,51 @@ Board::Board(std::vector<std::string> config)
         auto& current_char = current_config_line.at(column - 1 - empty_fields);
         if (current_char == 'r')
         {
-          current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::ROOK, Colour::BLACK)));
+          current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Rook>(Colour::BLACK)));
         }
         else if (current_char == 'n')
         {
-           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::KNIGHT, Colour::BLACK)));
+           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Knight>(Colour::BLACK)));
         }
         else if (current_char == 'b')
         {
-           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::BISHOP, Colour::BLACK)));
+           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Bishop>(Colour::BLACK)));
         }
         else if (current_char == 'q')
         {
-           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::QUEEN, Colour::BLACK)));
+           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Queen>(Colour::BLACK)));
         }
         else if (current_char == 'k')
         {
-           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::KING, Colour::BLACK)));
+           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<King>(Colour::BLACK)));
         }
         else if (current_char == 'p')
         {
-           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::PAWN, Colour::BLACK)));
+           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Pawn>(Colour::BLACK)));
         }
         else if (current_char == 'R')
         {
-           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::ROOK, Colour::WHITE)));
+           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Rook>(Colour::WHITE)));
         }
         else if (current_char == 'N')
         {
-           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::KNIGHT, Colour::WHITE)));
+           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Knight>(Colour::WHITE)));
         }
         else if (current_char == 'B')
         {
-           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::BISHOP, Colour::WHITE)));
+           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Bishop>(Colour::WHITE)));
         }
         else if (current_char == 'Q')
         {
-           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::QUEEN, Colour::WHITE)));
+           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Queen>(Colour::WHITE)));
         }
         else if (current_char == 'K')
         {
-           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::KING, Colour::WHITE)));
+           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<King>(Colour::WHITE)));
         }
         else if (current_char == 'P')
         {
-           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Figure>(FigureType::PAWN, Colour::WHITE)));
+           current_row.push_back(std::make_shared<Tile>(row, static_cast<Column>(column), std::make_shared<Pawn>(Colour::WHITE)));
         }
         else if ('1' <= current_char && current_char <= '8')
         {

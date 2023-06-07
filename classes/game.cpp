@@ -26,20 +26,28 @@ int Game::firstRound()
       {
         while(true)
         {
-        std::shared_ptr<CommandLine> cli;
-        std::shared_ptr<Action> current_action = std::make_shared<Action>(cli->readCommand(player->getColour()));
-        if (current_action->getActionType() == ActionType::QUIT)
-          return 1;
-        // DEBUG
-        std::cout << current_action->getActionAsString() << std::endl;
-        if (execute(current_action) == 0)
+          std::shared_ptr<CommandLine> cli;
+          std::shared_ptr<Action> current_action = std::make_shared<Action>(cli->readCommand(player->getColour()));
+          if (current_action->getActionType() == ActionType::QUIT)
+            return 1;
+          // DEBUG
+          std::cout << current_action->getActionAsString() << std::endl;
+          try
+          {
+            execute(player, current_action); // throws exception if not valid
+          }
+          catch(const std::exception& e)
+          {
+            continue;
+          }
           break;
         }
       }
     }
     else if (config_colour == "b" || config_colour == "B")
     {
-      players_.at(1)->getInput();
+      auto& player = players_.at(1);
+      // TODO REST
     }
     else
     {
@@ -63,18 +71,19 @@ int Game::run()
   return 0;
 }
 
-int Game::execute(std::shared_ptr<Action> action)
+void Game::execute(std::shared_ptr<Player> player, std::shared_ptr<Action> action)
 {
   ActionType action_type = action->getActionType(); 
   if (action_type == ActionType::MOVE_NORMAL)
   {
-    // insert code
+    // insert code here
+    throw std::exception();
   }
   else if (action_type == ActionType::MOVE_UNIQUE)
   {
-    // insert code
+    // insert code here
+    throw std::exception();
   }
-  return 0;
 }
 
 std::vector<std::string> Game::getConfig(std::string path)

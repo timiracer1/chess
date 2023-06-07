@@ -1,7 +1,7 @@
 #ifndef ACTION_HPP
 #define ACTION_HPP
 
-#include "figure.hpp"
+#include "pieces/figure.hpp"
 #include "tile.hpp"
 
 #include <vector>

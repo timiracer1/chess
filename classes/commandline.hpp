@@ -6,7 +6,7 @@
 #include <sstream>
 #include <memory>
 #include "action.hpp"
-#include "figure.hpp"
+#include "pieces/figure.hpp"
 
 class CommandLine
 {
