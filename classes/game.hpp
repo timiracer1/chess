@@ -8,6 +8,7 @@
 #include <sstream>
 #include "board.hpp"
 #include "player.hpp"
+#include "commandline.hpp"
 
 class Game
 {
@@ -15,14 +16,15 @@ class Game
     std::shared_ptr<Board> board_;
     std::vector<std::shared_ptr<Player>> players_;
     std::vector<std::string> config_;
+    std::vector<std::string> getConfig(std::string path);
+    int execute(std::shared_ptr<Action> action);
+    int firstRound();
 
   public:
     Game();
     Game(Game& game) = delete;
     ~Game() = default;
-    void run();
-    void firstRound();
-    std::vector<std::string> getConfig(std::string path);
+    int run();
 };
 
 #endif // GAME_HPP

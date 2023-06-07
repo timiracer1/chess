@@ -1,4 +1,4 @@
-#include "game.hpp"
+#include "classes/game.hpp"
 #include <memory>
 
 int main ()
@@ -6,7 +6,7 @@ int main ()
   try
   {
     std::shared_ptr<Game> game = std::make_shared<Game>();
-    game->run();
+    return game->run();
   }
   catch(const std::exception& e)
   {

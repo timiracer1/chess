@@ -15,15 +15,27 @@ Game::Game()
   }
 };
 
-void Game::firstRound()
+int Game::firstRound()
 {
   try
   {
     auto& config_colour = config_.at(8);
     if (config_colour == "w" || config_colour == "W")
     {
-      players_.at(0)->getInput();
-      players_.at(1)->getInput();
+      for (auto& player : players_)
+      {
+        while(true)
+        {
+        std::shared_ptr<CommandLine> cli;
+        std::shared_ptr<Action> current_action = std::make_shared<Action>(cli->readCommand(player->getColour()));
+        if (current_action->getActionType() == ActionType::QUIT)
+          return 1;
+        // DEBUG
+        std::cout << current_action->getActionAsString() << std::endl;
+        if (execute(current_action) == 0)
+          break;
+        }
+      }
     }
     else if (config_colour == "b" || config_colour == "B")
     {
@@ -38,12 +50,31 @@ void Game::firstRound()
   {
     throw std::runtime_error(e.what());
   }
+  return 0;
 }
 
-void Game::run()
+int Game::run()
 {
   std::cout << *board_;
-  firstRound();
+  if(firstRound() == 1)
+  {
+    return 1;
+  }
+  return 0;
+}
+
+int Game::execute(std::shared_ptr<Action> action)
+{
+  ActionType action_type = action->getActionType(); 
+  if (action_type == ActionType::MOVE_NORMAL)
+  {
+    // insert code
+  }
+  else if (action_type == ActionType::MOVE_UNIQUE)
+  {
+    // insert code
+  }
+  return 0;
 }
 
 std::vector<std::string> Game::getConfig(std::string path)
