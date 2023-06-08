@@ -1,7 +1,7 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-#include "pieces/figure.hpp"
+#include "settings.hpp"
 #include <string>
 #include <iostream>
 #include <vector>

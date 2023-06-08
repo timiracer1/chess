@@ -24,6 +24,7 @@ int Game::firstRound()
     {
       for (auto& player : players_)
       {
+        std::cout << *board_;
         while(true)
         {
           std::shared_ptr<CommandLine> cli;
@@ -38,6 +39,7 @@ int Game::firstRound()
           }
           catch(const std::exception& e)
           {
+            std::cout << e.what() << std::endl;
             continue;
           }
           break;
@@ -46,8 +48,8 @@ int Game::firstRound()
     }
     else if (config_colour == "b" || config_colour == "B")
     {
-      auto& player = players_.at(1);
       // TODO REST
+      //auto& player = players_.at(1);
     }
     else
     {
@@ -63,7 +65,6 @@ int Game::firstRound()
 
 int Game::run()
 {
-  std::cout << *board_;
   if(firstRound() == 1)
   {
     return 1;
@@ -73,11 +74,34 @@ int Game::run()
 
 void Game::execute(std::shared_ptr<Player> player, std::shared_ptr<Action> action)
 {
-  ActionType action_type = action->getActionType(); 
+  ActionType action_type = action->getActionType();
+  FigureType action_figure = action->getFigureType();
+  std::pair<Column, int> action_destination = action->getDestination();
+  Colour current_colour = player->getColour();
+  std::vector<std::shared_ptr<Tile>> possible_figure_tiles; // the tiles with figures on it that are ok to move
+  switch (action_figure)
+  {
+    case FigureType::PAWN:
+      possible_figure_tiles = board_->getPossibleFigureTiles(current_colour, action_figure, action_destination);
+      break;
+  
+  default:
+    break;
+  }
+
+  if (possible_figure_tiles.size() == 0)
+  {
+    throw std::runtime_error("No possible Move!");
+  }
+
   if (action_type == ActionType::MOVE_NORMAL)
   {
-    // insert code here
-    throw std::exception();
+    if (possible_figure_tiles.size() == 1)
+    {
+      //check if no piece and move
+    }
+    else
+      throw std::runtime_error("More than one Possible Figure!");
   }
   else if (action_type == ActionType::MOVE_UNIQUE)
   {
@@ -85,6 +109,8 @@ void Game::execute(std::shared_ptr<Player> player, std::shared_ptr<Action> actio
     throw std::exception();
   }
 }
+
+
 
 std::vector<std::string> Game::getConfig(std::string path)
 {

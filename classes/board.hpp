@@ -19,6 +19,7 @@ class Board
     Board(Board& board) = delete;
     ~Board() = default;
     friend std::ostream& operator<<(std::ostream& stream, Board& board);
+    std::vector<std::shared_ptr<Tile>> getPossibleFigureTiles(Colour current_colour, FigureType action_figure, std::pair<Column, int> destination);
 };
 
 #endif // BOARD_HPP

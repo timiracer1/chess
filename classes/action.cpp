@@ -85,6 +85,16 @@ ActionType Action::getActionType()
   return current_action_;
 }
 
+FigureType Action::getFigureType()
+{
+  return figure_to_move_;
+}
+
+std::pair<Column, int> Action::getDestination()
+{
+  return std::make_pair(column_, row_);
+}
+
 std::string Action::getActionAsString()
 {
   std::string output;
@@ -100,8 +110,8 @@ std::string Action::getActionAsString()
     }
     output.push_back('x');
   }
-  output.push_back(static_cast<int>(column_));
-  output.push_back(row_);
+  output.push_back(static_cast<int>(column_) + 'a' - 1);
+  output.push_back(row_ + '0');
   return output;
 }
 
@@ -110,14 +120,14 @@ void Action::pawnMove(std::string parameters)
     figure_to_move_ = FigureType::PAWN;
     if ('a' <= parameters.at(0) && parameters.at(0) <= 'h')
     {
-      column_ = static_cast<Column>(parameters.at(0));
+      column_ = static_cast<Column>(parameters.at(0) - 'a' + 1);
     }
     else
       throw std::runtime_error("Invalid Column!");
     
     if ('1' <= parameters.at(1) && parameters.at(1) <= '8')
     {
-      row_ = static_cast<int>(parameters.at(1));
+      row_ = static_cast<int>(parameters.at(1)) - '0';
     }
     else
       throw std::runtime_error("Invalid Row!");

@@ -1,6 +1,10 @@
 #ifndef FIGURE_HPP
 #define FIGURE_HPP
 
+#include "../settings.hpp"
+#include <vector>
+#include <memory>
+
 enum class FigureType : char
 {
   PAWN = 'P',
@@ -12,16 +16,9 @@ enum class FigureType : char
   NONE = ' '
 };
 
-enum class Colour : char
-{
-  BLACK = 'b',
-  WHITE = 'w',
-  NONE = ' ',
-};
-
 class Figure
 {
-  private:
+  protected:
     FigureType type_;
     Colour colour_;
     bool has_moved_;
@@ -32,6 +29,7 @@ class Figure
     ~Figure() = default;
     FigureType getType();
     Colour getColour();
+    virtual bool moveValid(Colour current_colour, std::pair<Column, int> starting_pos, std::pair<Column, int> destination);
 };
 
 #endif // FIGURE_HPP

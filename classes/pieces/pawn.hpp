@@ -2,6 +2,7 @@
 #define PAWN_HPP
 
 #include "figure.hpp"
+#include <iostream>
 
 class Pawn : public Figure
 {
@@ -9,8 +10,7 @@ class Pawn : public Figure
     Pawn(Colour colour);
     ~Pawn() = default;
     Pawn() = delete;
-  
-  private:
+    bool moveValid(Colour current_colour, std::pair<Column, int> starting_pos, std::pair<Column, int> destination) override;
 };
 
 #endif // PAWN_HPP

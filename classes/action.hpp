@@ -23,6 +23,8 @@ class Action
     Action(const Action& action) = default;
     ActionType getActionType();
     std::string getActionAsString();
+    FigureType getFigureType();
+    std::pair<Column, int> getDestination();
 
   private:
     FigureType figure_to_move_;

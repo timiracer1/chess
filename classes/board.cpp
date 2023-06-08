@@ -104,3 +104,23 @@ std::ostream& operator<<(std::ostream& stream, Board& board)
   stream << "     a    b    c    d    e    f    g    h " << std::endl;
   return stream;
 }
+
+std::vector<std::shared_ptr<Tile>> Board::getPossibleFigureTiles(Colour current_colour, FigureType action_figure, std::pair<Column, int> destination)
+{
+  std::vector<std::shared_ptr<Tile>> result;
+  for (auto& row : map_)
+  {
+    for (auto& tile : row)
+    {
+      auto& current_figure = tile->getFigure();
+      if (current_figure->getType() == action_figure)
+      {
+        if (current_figure->moveValid(current_colour, tile->getCoords(), destination))
+        {
+          result.push_back(tile);
+        }
+      }
+    }
+  }
+  return result;
+}
